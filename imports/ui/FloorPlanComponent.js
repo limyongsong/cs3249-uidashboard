@@ -20,7 +20,7 @@ class FloorPlanComponent extends Component {
 
         </header>
         <center>
-        <svg height="100%" width="100%">
+        <svg height="300" width="100%">
             <g className="Room0">
               <rect className="Room0color" x="0%" y="0%" height="40%" width="42%" stroke="black" stroke-width="2" fill="whitesmoke" />
               <text x="2%" y = "20%" font-size="100%" fill="black">Room 0</text>
