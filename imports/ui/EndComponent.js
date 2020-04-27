@@ -17,6 +17,12 @@ class EndComponent extends Component {
         endTime: '12:45:00',  /*, just nice 128 samples from start date*/
       };
   }
+  updateDate(e){
+    this.setState({endDate: e.target.value});
+  }
+  updateTime(e){
+    this.setState({endTime: e.target.value});
+  }
   render() {
     return (
       <div className="container">
@@ -27,8 +33,8 @@ class EndComponent extends Component {
         </header>
  
         <center>
-        <h2><input type="date" id="enddateid" value={this.state.endDate}/></h2>
-        <h2><input type="time" id="endtimeid" value={this.state.endTime}/></h2>
+        <h2><input type="date" id="enddateid" value={this.state.endDate} onChange={this.updateDate.bind(this)}/></h2>
+        <h2><input type="time" id="endtimeid" value={this.state.endTime} onChange={this.updateTime.bind(this)}/></h2>
         </center>
       </div>
     );

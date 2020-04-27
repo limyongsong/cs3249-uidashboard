@@ -17,6 +17,12 @@ class StartComponent extends Component {
         startTime: '05:00:00', 
       };
   }
+  updateDate(e){
+    this.setState({startDate: e.target.value});
+  }
+  updateTime(e){
+    this.setState({startTime: e.target.value});
+  }
   render() {
     return (
       <div className="container">
@@ -27,8 +33,8 @@ class StartComponent extends Component {
         </header>
 
         <center>
-        <h2><input type="date" id="startdateid" value={this.state.startDate}/></h2>
-        <h2><input type="time" id="starttimeid" value={this.state.startTime}/></h2>
+        <h2><input type="date" id="startdateid" value={this.state.startDate} onChange={this.updateDate.bind(this)}/></h2>
+        <h2><input type="time" id="starttimeid" value={this.state.startTime} onChange={this.updateTime.bind(this)}/></h2>
         </center>
       </div>
     );

@@ -16,6 +16,11 @@ class SampleComponent extends Component {
         samples: 128, /* default samples*/
       };
   }
+  updateSamples(e){
+    if (e.target.value < 2) e.target.value = 2;
+    if (e.target.value > 4096) e.target.value = 4096;
+    this.setState({samples: e.target.value});
+  }
   render() {
     return (
       <div className="container">
@@ -26,7 +31,7 @@ class SampleComponent extends Component {
         </header>
  
         <center>
-        <h2><input type="number" id="samplesid" min="1" max="4096" value={this.state.samples}/></h2>
+        <h2><input type="number" id="samplesid" min="1" max="4096" value={this.state.samples} onChange={this.updateSamples.bind(this)}/></h2>
         </center>
       </div>
     );
