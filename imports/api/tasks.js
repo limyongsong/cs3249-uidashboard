@@ -16,8 +16,6 @@ Meteor.methods({
     Tasks.insert({
       text,
       createdAt: new Date(),
-      owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username,
     });
   },
   'tasks.remove'(taskId) {

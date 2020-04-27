@@ -14,25 +14,59 @@ body {
   padding: 0;
   margin: 0;
  
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
   font-size: 14px;
 }
- 
+/*render-target is leftpane, render-target2 is rightpane*/
+#render-target{
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: lightgrey;
+} 
+#render-target2{
+  width: 67%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: white;
+}
+#render-target>[id='c1'] {
+  /*height: 33%;*/
+} 
+#render-target>[id='c2'] {
+  /*height: 33%;*/
+} 
+#render-target>[id='c3'] {
+  /*height: 34%;*/
+} 
+#render-target2>[id='c4'] {
+  height: 50%;
+} 
+#render-target2>[id='c5'] {
+  height: 50%;
+} 
+/*for left component backgrounds*/
 .container {
-  max-width: 600px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  background: lightgrey;
+}
+/*for right component backgrounds*/
+.container2 {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   min-height: 100%;
   background: white;
-}
- 
-header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
-  position: relative;
-}
- 
-#login-buttons {
-  display: block;
 }
  
 h1 {
@@ -42,7 +76,8 @@ h1 {
   display: inline-block;
   margin-right: 1em;
 }
- 
+
+/*Things below can be reused but was part of meteor tut*/
 form {
   margin-top: 10px;
   margin-bottom: -10px;
@@ -110,17 +145,3 @@ header .hide-completed {
   margin-left: 5px;
 }
  
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
- 
-  .search {
-    width: 150px;
-    clear: both;
-  }
- 
-  .new-task input {
-    padding-bottom: 5px;
-  }
-}
