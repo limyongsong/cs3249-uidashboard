@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
  
 import { Tasks } from '../api/tasks.js';
- 
-import Task from './Task.js';
 
 import './samplecomponent.css'
  
@@ -15,6 +13,9 @@ class SampleComponent extends Component {
       this.state = { 
         samples: 128, /* default samples*/
       };
+  }
+  componentDidMount(){
+    Meteor.call('tasks.updateSamples', "855", this.state.samples); 
   }
   updateSamples(e){
     if (e.target.value < 2) e.target.value = 2;

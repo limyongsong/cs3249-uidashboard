@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
  
 import { Tasks } from '../api/tasks.js';
- 
-import Task from './Task.js';
 
 import './floorplancomponent.css';
  
@@ -13,7 +11,7 @@ class FloorPlanComponent extends Component {
   constructor(props) {
       super(props);
       this.state = { 
-          r0: true,
+          r0: true, //true means room is clicked
           r1: true,
           r2: true,
           r3: true,
@@ -30,6 +28,25 @@ class FloorPlanComponent extends Component {
       };
       //gives the color based on avg temp, VIEWModel part
       this.determineColor = this.determineColor.bind(this);
+  }
+  componentDidMount(){
+    Meteor.call('tasks.updateFloorPlan', 
+      "855", 
+      this.state.r0,
+      this.state.r1,
+      this.state.r2,
+      this.state.r3,
+      this.state.r4,
+      this.state.r5,
+      this.state.r6,
+      this.state.r0avgTemp,
+      this.state.r1avgTemp,
+      this.state.r2avgTemp,
+      this.state.r3avgTemp,
+      this.state.r4avgTemp,
+      this.state.r5avgTemp,
+      this.state.r6avgTemp,
+      ); 
   }
   toggleR0(){this.setState({r0: !this.state.r0});}
   toggleR1(){this.setState({r1: !this.state.r1});}
@@ -64,7 +81,7 @@ class FloorPlanComponent extends Component {
       <div className="container2">
         <header className="FloorPlanHeader">
 
-         <h1>FloorPlan</h1>
+         <h1>FloorPlan </h1>
 
         </header>
         <center>

@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
  
 import { Tasks } from '../api/tasks.js';
- 
-import Task from './Task.js';
 
 import './endcomponent.css'
  
@@ -16,6 +14,9 @@ class EndComponent extends Component {
         endDate: '2013-10-03', /* default end date&time*/
         endTime: '12:45:00',  /*, just nice 128 samples from start date*/
       };
+  }
+  componentDidMount(){
+    Meteor.call('tasks.updateEnd', "855", this.state.endDate, this.state.endTime); 
   }
   updateDate(e){
     this.setState({endDate: e.target.value});

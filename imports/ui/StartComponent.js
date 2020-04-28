@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
  
 import { Tasks } from '../api/tasks.js';
- 
-import Task from './Task.js';
 
 import './startcomponent.css'
  
@@ -16,6 +14,9 @@ class StartComponent extends Component {
         startDate: '2013-10-02', /* default date&time*/
         startTime: '05:00:00', 
       };
+  }
+  componentDidMount(){
+    Meteor.call('tasks.updateStart', "855", this.state.startDate, this.state.startTime); 
   }
   updateDate(e){
     this.setState({startDate: e.target.value});
