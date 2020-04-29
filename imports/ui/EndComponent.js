@@ -20,9 +20,11 @@ class EndComponent extends Component {
   }
   updateDate(e){
     this.setState({endDate: e.target.value});
+    Meteor.call('tasks.updateEnd', "855", e.target.value, this.state.endTime); 
   }
   updateTime(e){
     this.setState({endTime: e.target.value});
+    Meteor.call('tasks.updateEnd', "855", this.state.endDate, e.target.value); 
   }
   render() {
     return (

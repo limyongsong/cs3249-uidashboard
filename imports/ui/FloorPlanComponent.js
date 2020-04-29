@@ -28,8 +28,9 @@ class FloorPlanComponent extends Component {
       };
       //gives the color based on avg temp, VIEWModel part
       this.determineColor = this.determineColor.bind(this);
+      this.updateRooms = this. updateRooms.bind(this);
   }
-  componentDidMount(){
+  updateRooms(){
     Meteor.call('tasks.updateFloorPlan', 
       "855", 
       this.state.r0,
@@ -47,6 +48,12 @@ class FloorPlanComponent extends Component {
       this.state.r5avgTemp,
       this.state.r6avgTemp,
       ); 
+  }
+  componentDidMount(){
+    this.updateRooms();
+  }
+  componentDidUpdate(){
+    this.updateRooms();
   }
   toggleR0(){this.setState({r0: !this.state.r0});}
   toggleR1(){this.setState({r1: !this.state.r1});}

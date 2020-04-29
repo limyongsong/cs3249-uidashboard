@@ -20,9 +20,11 @@ class StartComponent extends Component {
   }
   updateDate(e){
     this.setState({startDate: e.target.value});
+    Meteor.call('tasks.updateStart', "855", e.target.value, this.state.startTime); 
   }
   updateTime(e){
     this.setState({startTime: e.target.value});
+    Meteor.call('tasks.updateStart', "855", this.state.startDate, e.target.value); 
   }
   render() {
     return (

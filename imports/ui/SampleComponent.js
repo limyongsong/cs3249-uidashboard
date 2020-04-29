@@ -21,6 +21,7 @@ class SampleComponent extends Component {
     if (e.target.value < 2) e.target.value = 2;
     if (e.target.value > 4096) e.target.value = 4096;
     this.setState({samples: e.target.value});
+    Meteor.call('tasks.updateSamples', "855", e.target.value); 
   }
   render() {
     return (
