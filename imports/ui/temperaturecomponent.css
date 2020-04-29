@@ -4,3 +4,12 @@
   position: relative;
   color: white;
 }
+
+.graphContainer{
+  padding: 20px 15px 15px 15px;
+ text-align: center;
+}
+
+.graph{
+    display: inline-block;
+}
