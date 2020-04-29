@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import '../imports/api/tasks.js';
+//import '../imports/api/tasks.js';
+import { Tasks } from '../imports/api/tasks.js';
 //for csv parsing
 import Papa from 'papaparse';
 
@@ -17,4 +18,8 @@ Meteor.startup(() => {
 	  }
 	})
   }
+    
+    Meteor.publish('tasks', function(){
+                 return Tasks.find();
+    })
 });
