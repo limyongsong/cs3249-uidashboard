@@ -17,6 +17,21 @@ class EndComponent extends Component {
   }
   componentDidMount(){
     Meteor.call('tasks.updateEnd', "855", this.state.endDate, this.state.endTime); 
+     Tasks.find({}).observeChanges({
+          changed: function (id, fields) {
+            if (fields.endDate != undefined){
+              var answer_array = fields.endDate.split('T');
+              this.setState({endDate: answer_array[0]});
+              this.setState({endTime: answer_array[1]});
+            } 
+          }.bind(this)
+        });
+  }
+  componentDidUpdate(){
+    const taskSubscription = Meteor.subscribe('tasks');
+     Tracker.autorun(() => {
+          if (!taskSubscription.ready()) return;
+        });
   }
   updateDate(e){
     this.setState({endDate: e.target.value});

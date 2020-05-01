@@ -25,151 +25,194 @@ class TemperatureComponent extends Component {
             startDate: "2013-10-02T03:00:00",
             endDate: "2013-10-03T12:45:00",
             samplingRate: 128,
+            data: "",
+            graphData: "",
+            arrData: "",
+            r0: true,
+            r1: true,
+            r2: true,
+            r3: true,
+            r4: true,
+            r5: true,
+            r6: true,
         }
-      
   }
-    
-    componentDidMount(){
-        
-        const taskSubscription = Meteor.subscribe('tasks');
-        Tracker.autorun(() => {
-            if (!taskSubscription.ready()) return;
-            const a = Tasks.find({timestamp:{$gt: this.state.startDate,
-                                            $lt: this.state.endDate}}).fetch();
-            console.log(a);
-            var graphData = {};
-            a.forEach(data => {
-                const date = new Date(data.timestamp);
-                if (data.RoomID == "0"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(1, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(1, 0, Number(data.temperature));
-                    }
-                }
-                if (data.RoomID == "1"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(2, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(2, 0, Number(data.temperature));
-                    }
-                }if (data.RoomID == "2"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(3, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(3, 0, Number(data.temperature));
-                    }
-                }if (data.RoomID == "3"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(4, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(4, 0, Number(data.temperature));
-                    }
-                }if (data.RoomID == "4"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(5, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(5, 0, Number(data.temperature));
-                    }
-                }if (data.RoomID == "5"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(6, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(6, 0, Number(data.temperature));
-                    }
-                }if (data.RoomID == "6"){
-                    if (!(date in graphData)){
-                        graphData[date] = [date];
-                        graphData[date].splice(7, 0, Number(data.temperature));
-                    }
-                    else if (date in graphData){
-                        graphData[date].splice(7, 0, Number(data.temperature));
-                    }
-                }
-                
-            })
-            var arrData = [];
-            for (var i in graphData) {
-                if (graphData[i].length == 7) {
-                    var count = 0;
-                    var ave = 0;
-                    
+
+  componentDidMount(){
+    Tasks.find({}).observeChanges({
+            changed: function (id, fields) {
+              //console.log("changes");
+              if (fields.startDate != undefined){
+                this.setState({startDate: fields.startDate});
+              } if (fields.endDate != undefined){
+                this.setState({endDate: fields.endDate});
+              } if (fields.samples != undefined){
+                this.setState({samplingRate: fields.samples});
+              } if (fields.r0 != undefined){
+                this.setState({r0: fields.r0});
+              } if (fields.r1 != undefined){
+                this.setState({r1: fields.r1});
+              } if (fields.r2 != undefined){
+                this.setState({r2: fields.r2});
+              } if (fields.r3 != undefined){
+                this.setState({r3: fields.r3});
+              } if (fields.r4 != undefined){
+                this.setState({r4: fields.r4});
+              } if (fields.r5 != undefined){
+                this.setState({r5: fields.r5});
+              } if (fields.r6 != undefined){
+                this.setState({r6: fields.r6});
+              } 
+            }.bind(this)
+          });
+  }
+  
+  componentDidUpdate(){
+      
+      const taskSubscription = Meteor.subscribe('tasks');
+      Tracker.autorun(() => {
+          if (!taskSubscription.ready()) return;
+          const a = Tasks.find({timestamp:{$gt: this.state.startDate,
+                                          $lt: this.state.endDate}}).fetch();
+          //console.log(a);
+          var graphData = {};
+          a.forEach(data => {
+              const date = new Date(data.timestamp);
+              if (data.RoomID == "0"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(1, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(1, 0, Number(data.temperature));
+                  }
+              }
+              if (data.RoomID == "1"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(2, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(2, 0, Number(data.temperature));
+                  }
+              }if (data.RoomID == "2"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(3, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(3, 0, Number(data.temperature));
+                  }
+              }if (data.RoomID == "3"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(4, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(4, 0, Number(data.temperature));
+                  }
+              }if (data.RoomID == "4"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(5, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(5, 0, Number(data.temperature));
+                  }
+              }if (data.RoomID == "5"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(6, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(6, 0, Number(data.temperature));
+                  }
+              }if (data.RoomID == "6"){
+                  if (!(date in graphData)){
+                      graphData[date] = [date];
+                      graphData[date].splice(7, 0, Number(data.temperature));
+                  }
+                  else if (date in graphData){
+                      graphData[date].splice(7, 0, Number(data.temperature));
+                  }
+              }
+              
+          })
+          var arrData = [];
+          for (var i in graphData) {
+              if (graphData[i].length == 7) {
+                  var count = 0;
+                  var ave = 0;
+                  
 //                    console.log("Key: " + i);
 //                    console.log("Value: " + graphData[i]);
-                    var temp = new Date(i);
+                  var temp = new Date(i);
 //                    console.log("Default date: " + temp);
-                    var tempPlus = new Date(temp.getTime() + 15*60000);
-                    var tempMinus = new Date(temp.getTime() - 15*60000);
+                  var tempPlus = new Date(temp.getTime() + 15*60000);
+                  var tempMinus = new Date(temp.getTime() - 15*60000);
 //                    console.log(graphData[tempPlus]);
 //                    console.log(graphData[tempMinus]);
-                    
-                    if (graphData[tempPlus] != null){
-                        count = count + 1;
-                        ave = ave + graphData[tempPlus][6]
-                    }
-                    if (graphData[tempMinus] != null){
-                        count = count + 1;
-                        ave = ave + graphData[tempMinus][6]
-                    }
-                    graphData[i].splice(6 ,0 , ave/count);
+                  
+                  if (graphData[tempPlus] != null){
+                      count = count + 1;
+                      ave = ave + graphData[tempPlus][6]
+                  }
+                  if (graphData[tempMinus] != null){
+                      count = count + 1;
+                      ave = ave + graphData[tempMinus][6]
+                  }
+                  graphData[i].splice(6 ,0 , ave/count);
 //                    console.log("New Value: " + graphData[i]);
-                }
-                arrData.push(graphData[i])
-            }
-            console.log(arrData);
-            this.setState({data: a,
-                          graphData:graphData,
-                          arrData: arrData});
-            this.renderDygraph(this.state.samplingRate);
-        });
+              }
+              arrData.push(graphData[i])
+          }
+          //console.log(arrData);
+          this.state.data = a;
+          this.state.graphData = graphData;
+          this.state.arrData = arrData
+          /* changed to "this.state=" because changed function to be in componentdidupdate instead of componentdidmount
+          this.setState({data: a,
+                        graphData:graphData,
+                        arrData: arrData});
+                        */
+          this.renderDygraph(this.state.samplingRate);
+      });
 //        var temp = Tasks.findOne().fetch();
 //        
 //      this.setState({temp:temp});
 
-    }
-    
-    renderDygraph(sampling){
-        if (this.state.arrData.length >= sampling){
-            const delta = Math.floor(this.state.arrData.length/sampling);
-            var newArr = [];
-            
-            for (var i = 0; i < this.state.arrData.length; i=i+delta) {
-                newArr.push(this.state.arrData[i]);
-            }
-            
-        }
-        else {
-            var newArr = this.state.arrData;
-        }
-        
-        
-            var g = new Dygraph(
-            // containing div
-            document.getElementById("graphdiv"),
-        
-                newArr,
-            // CSV or path to a CSV file.
+  }
+  
+  renderDygraph(sampling){
+      if (this.state.arrData.length >= sampling){
+          const delta = Math.floor(this.state.arrData.length/sampling);
+          var newArr = [];
+          
+          for (var i = 0; i < this.state.arrData.length; i=i+delta) {
+              newArr.push(this.state.arrData[i]);
+          }
+          
+      }
+      else {
+          var newArr = this.state.arrData;
+      }
+      
+      
+          var g = new Dygraph(
+          // containing div
+          document.getElementById("graphdiv"),
+      
+              newArr,
+          // CSV or path to a CSV file.
 //            "Date,Temperature1, Temperature 2\n" +
 //            "2008-05-07,75,\n" +
 //            "2008-05-08,70,\n" +
 //            "2008-05-09,,80\n"  ,
-                {width: 600,
-                labels: ["Timetamp", "Room 0", "Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6"]}
-            );
+              {width: 600,
+              labels: ["Timetamp", "Room 0", "Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6"]}
+          );
 
-    }
+  }
  
   render() {
     return (

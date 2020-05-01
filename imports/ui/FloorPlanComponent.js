@@ -28,7 +28,7 @@ class FloorPlanComponent extends Component {
       };
       //gives the color based on avg temp, VIEWModel part
       this.determineColor = this.determineColor.bind(this);
-      this.updateRooms = this. updateRooms.bind(this);
+      this.updateRooms = this.updateRooms.bind(this);
   }
   updateRooms(){
     Meteor.call('tasks.updateFloorPlan', 
@@ -51,9 +51,32 @@ class FloorPlanComponent extends Component {
   }
   componentDidMount(){
     this.updateRooms();
+     Tasks.find({}).observeChanges({
+      changed: function (id, fields) {
+        if (fields.r0avgTemp != undefined){
+          this.setState({r0avgTemp: fields.r0avgTemp});
+        } if (fields.r1avgTemp != undefined){
+          this.setState({r1avgTemp: fields.r1avgTemp});
+        } if (fields.r2avgTemp != undefined){
+          this.setState({r2avgTemp: fields.r2avgTemp});
+        } if (fields.r3avgTemp != undefined){
+          this.setState({r3avgTemp: fields.r3avgTemp});
+        } if (fields.r4avgTemp != undefined){
+          this.setState({r4avgTemp: fields.r4avgTemp});
+        } if (fields.r5avgTemp != undefined){
+          this.setState({r5avgTemp: fields.r5avgTemp});
+        } if (fields.r6avgTemp != undefined){
+          this.setState({r6avgTemp: fields.r6avgTemp});
+        } 
+      }.bind(this)
+    });
   }
   componentDidUpdate(){
     this.updateRooms();
+    const taskSubscription = Meteor.subscribe('tasks');
+     Tracker.autorun(() => {
+          if (!taskSubscription.ready()) return;
+        });
   }
   toggleR0(){this.setState({r0: !this.state.r0});}
   toggleR1(){this.setState({r1: !this.state.r1});}

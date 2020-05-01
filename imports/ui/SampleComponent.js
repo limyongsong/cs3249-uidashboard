@@ -16,6 +16,19 @@ class SampleComponent extends Component {
   }
   componentDidMount(){
     Meteor.call('tasks.updateSamples', "855", this.state.samples); 
+    Tasks.find({}).observeChanges({
+        changed: function (id, fields) {
+          if (fields.samples != undefined){
+            this.setState({samples: fields.samples});
+          } 
+        }.bind(this)
+      });
+  }
+  componentDidUpdate(){
+    const taskSubscription = Meteor.subscribe('tasks');
+     Tracker.autorun(() => {
+          if (!taskSubscription.ready()) return;
+        });
   }
   updateSamples(e){
     if (e.target.value < 2) e.target.value = 2;
