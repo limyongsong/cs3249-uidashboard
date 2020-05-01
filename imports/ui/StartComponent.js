@@ -17,6 +17,21 @@ class StartComponent extends Component {
   }
   componentDidMount(){
     Meteor.call('tasks.updateStart', "855", this.state.startDate, this.state.startTime); 
+     Tasks.find({}).observeChanges({
+            changed: function (id, fields) {
+              if (fields.startDate != undefined){
+                var answer_array = fields.startDate.split('T');
+                this.setState({startDate: answer_array[0]});
+                this.setState({startTime: answer_array[1]});
+              } 
+            }.bind(this)
+          });
+  }
+  componentDidUpdate(){
+    const taskSubscription = Meteor.subscribe('tasks');
+     Tracker.autorun(() => {
+          if (!taskSubscription.ready()) return;
+        });
   }
   updateDate(e){
     this.setState({startDate: e.target.value});

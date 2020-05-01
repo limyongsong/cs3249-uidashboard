@@ -20,9 +20,7 @@ Meteor.methods({
       text,
       _id :  "855",
       startDate: "",
-      startTime: "",
       endDate: "",
-      endTime: "",
       samples: "",
       r0: false, //true means room is clicked
       r1: false,
@@ -41,10 +39,12 @@ Meteor.methods({
     });}
   },
   'tasks.updateStart'(id, startDate, startTime){
-    Tasks.update(id, {$set: {startDate: startDate, startTime: startTime}});
+    var tempDate = startDate + "T" + startTime;
+    Tasks.update(id, {$set: {startDate: tempDate}});
   },
   'tasks.updateEnd'(id, endDate, endTime){
-    Tasks.update(id, {$set: {endDate: endDate, endTime: endTime}});
+    var tempDate = endDate + "T" + endTime;
+    Tasks.update(id, {$set: {endDate: tempDate}});
   },
   'tasks.updateSamples'(id, samples){
     Tasks.update(id, {$set: {samples: samples}});
