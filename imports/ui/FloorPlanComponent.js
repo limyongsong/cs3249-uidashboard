@@ -126,7 +126,7 @@ class FloorPlanComponent extends Component {
             </g>
             <g className="Room2">
               <rect className="Room2color" x="16.7%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r2, this.state.r2avgTemp)} onClick={this.toggleR2.bind(this)}/>
-              <text x="18.7%" y = "80%" font-size="100%" fill="black">Room 2</text>
+              <text x="18.7%" y = "80%" font-size="100%" fill="black">Room 2 - {this.state.r2avgTemp}</text>
             </g>
             <g className="Room3">
               <rect className="Room3color" x="33.4%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r3, this.state.r3avgTemp)} onClick={this.toggleR3.bind(this)}/>

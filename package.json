@@ -8,7 +8,7 @@
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
-    "@babel/runtime": "^7.9.2",
+    "@babel/runtime": "^7.9.6",
     "csv-parse": "^4.9.0",
     "dygraphs": "^2.1.0",
     "jquery": "^3.4.1",
