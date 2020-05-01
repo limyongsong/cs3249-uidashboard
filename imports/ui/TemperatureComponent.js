@@ -28,6 +28,13 @@ class TemperatureComponent extends Component {
             data: "",
             graphData: "",
             arrData: "",
+            r0: true,
+            r1: true,
+            r2: true,
+            r3: true,
+            r4: true,
+            r5: true,
+            r6: true,
         }
   }
 
@@ -41,7 +48,21 @@ class TemperatureComponent extends Component {
                 this.setState({endDate: fields.endDate});
               } if (fields.samples != undefined){
                 this.setState({samplingRate: fields.samples});
-              }
+              } if (fields.r0 != undefined){
+                this.setState({r0: fields.r0});
+              } if (fields.r1 != undefined){
+                this.setState({r1: fields.r1});
+              } if (fields.r2 != undefined){
+                this.setState({r2: fields.r2});
+              } if (fields.r3 != undefined){
+                this.setState({r3: fields.r3});
+              } if (fields.r4 != undefined){
+                this.setState({r4: fields.r4});
+              } if (fields.r5 != undefined){
+                this.setState({r5: fields.r5});
+              } if (fields.r6 != undefined){
+                this.setState({r6: fields.r6});
+              } 
             }.bind(this)
           });
   }
