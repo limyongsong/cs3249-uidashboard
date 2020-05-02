@@ -119,30 +119,37 @@ class FloorPlanComponent extends Component {
             <g className="Room0">
               <rect className="Room0color" x="0%" y="0%" height="40%" width="42%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r0, this.state.r0avgTemp)} onClick={this.toggleR0.bind(this)}/>
               <text x="2%" y = "20%" font-size="100%" fill="black">Room 0</text>
+<text x="2%" y = "25%" font-size="100%" fill="black">Average - {this.state.r0avgTemp}</text>
             </g>
             <g className="Room1">
               <rect className="Room1color" x="0%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r1, this.state.r1avgTemp)} onClick={this.toggleR1.bind(this)}/>
               <text x="2%" y = "80%" font-size="100%" fill="black">Room 1</text>
+<text x="2%" y = "85%" font-size="100%" fill="black">Average - {this.state.r1avgTemp}</text>
             </g>
             <g className="Room2">
               <rect className="Room2color" x="16.7%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r2, this.state.r2avgTemp)} onClick={this.toggleR2.bind(this)}/>
-              <text x="18.7%" y = "80%" font-size="100%" fill="black">Room 2 - {this.state.r2avgTemp}</text>
+              <text x="18.7%" y = "80%" font-size="100%" fill="black">Room 2</text>
+              <text x="18.7%" y = "85%" font-size="100%" fill="black">Average - {this.state.r2avgTemp}</text> 
             </g>
             <g className="Room3">
               <rect className="Room3color" x="33.4%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r3, this.state.r3avgTemp)} onClick={this.toggleR3.bind(this)}/>
               <text x="35.4%" y = "80%" font-size="100%" fill="black">Room 3</text>
+<text x="35.4%" y = "85%" font-size="100%" fill="black">Average - {this.state.r3avgTemp}</text>
             </g>
             <g className="Room4">
               <rect className="Room4color" x="50.1%" y="60%" height="40%" width="16.7%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r4, this.state.r4avgTemp)} onClick={this.toggleR4.bind(this)}/>
               <text x="52.1%" y = "80%" font-size="100%" fill="black">Room 4</text>
+<text x="52.1%" y = "85%" font-size="100%" fill="black">Average - {this.state.r4avgTemp}</text>
             </g>
             <g className="Room5">
               <rect className="Room5color" x="66.8%" y="60%" height="40%" width="16.6%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r5, this.state.r5avgTemp)} onClick={this.toggleR5.bind(this)}/>
               <text x="68.8%" y = "80%" font-size="100%" fill="black">Room 5</text>
+<text x="68.8%" y = "85%" font-size="100%" fill="black">Average - {this.state.r5avgTemp}</text>
             </g>
             <g className="Room6">
               <rect className="Room6color" x="83.4%" y="60%" height="40%" width="16.6%" stroke="black" stroke-width="2" fill={this.determineColor(this.state.r6, this.state.r6avgTemp)} onClick={this.toggleR6.bind(this)}/>
               <text x="85.4%" y = "80%" font-size="100%" fill="black">Room 6</text>
+<text x="85.4%" y = "85%" font-size="100%" fill="black">Average - {this.state.r6avgTemp}</text>
             </g>
             <rect className="background" x="0%" y="0%" height="100%" width="100%" stroke="black" stroke-width="5" fill="none" />
         </svg>
