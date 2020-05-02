@@ -25,9 +25,9 @@ class TemperatureComponent extends Component {
             startDate: "2013-10-02T03:00:00",
             endDate: "2013-10-03T12:45:00",
             samplingRate: 128,
-            data: "",
-            graphData: "",
-            arrData: "",
+            data: [],
+            graphData: {},
+            arrData: [],
             r0: true,
             r1: true,
             r2: true,
@@ -200,6 +200,7 @@ class TemperatureComponent extends Component {
 //          this.state.r5avgTemp = aveData[5];
 //          this.state.r6avgTemp = aveData[6];
 //         changed to "this.state=" because changed function to be in componentdidupdate instead of componentdidmount
+          console.log("setstate from ComponentDidMount");
           this.setState({data: a,
                         graphData:graphData,
                         arrData: arrData,
@@ -271,6 +272,53 @@ class TemperatureComponent extends Component {
           var newArr = this.state.arrData;
       }
       
+      var aveData = [0,0,0,0,0,0,0];
+      var count = 0;
+      
+      console.log(typeof(newArr));
+      console.log(newArr);
+      newArr.forEach(element => {
+          //              console.log(element);
+          
+          
+          if ((Date.parse(this.state.startDate) <= Date.parse(element[0])) && Date.parse(this.state.endDate) >= Date.parse(element[0])) {
+              count = count + 1;
+              console.log('test');
+              aveData[0] = aveData[0] + element[1];
+              aveData[1] = aveData[1] + element[2];
+              aveData[2] = aveData[2] + element[3];
+              aveData[3] = aveData[3] + element[4];
+              aveData[4] = aveData[4] + element[5];
+              aveData[5] = aveData[5] + element[6];
+              aveData[6] = aveData[6] + element[7];
+          }
+          
+      })
+      
+      if (count>0){      
+      aveData = aveData.map(e => {
+          var result = e/count;
+          result = result.toFixed(3);
+          return Number(result)}
+                           )
+      console.log(this.state.aveData);
+      console.log(aveData);
+      if (this.state.aveData[0] != aveData[0]){
+          console.log("setstate from before Dygraph render");
+          this.setState({
+              aveData: aveData,
+              r0avgTemp: aveData[0],
+              r1avgTemp: aveData[1],
+              r2avgTemp: aveData[2],
+              r3avgTemp: aveData[3],
+              r4avgTemp: aveData[4],
+              r5avgTemp: aveData[5],
+              r6avgTemp: aveData[6],
+          })
+      }}
+      
+      
+      
       
           var g = new Dygraph(
           // containing div
@@ -296,33 +344,11 @@ class TemperatureComponent extends Component {
           );
       
       function tempFunc(newStart, newEnd){
-                    
-          var aveData = [0,0,0,0,0,0,0];
-          this.state.arrData.forEach(element => {
-              console.log(element);
-              
-              
-              if ((Date.parse(this.state.startDate) <= Date.parse(element[0])) && Date.parse(this.state.startDate) >= Date.parse(element[0])) {
-                  console.log('test');
-                  aveData[0] = aveData[0] + element[1];
-                  aveData[1] = aveData[1] + element[2];
-                  aveData[2] = aveData[2] + element[3];
-                  aveData[3] = aveData[3] + element[4];
-                  aveData[4] = aveData[4] + element[5];
-                  aveData[5] = aveData[5] + element[6];
-                  aveData[6] = aveData[6] + element[7];
-              }
-              
-          })
-          aveData = aveData.map(e => {
-              var result = e/Object.keys(this.state.graphData).length;
-              result = result.toFixed(3);
-              return Number(result)}
-                                )
+          
+          console.log("setstate from Dygraph");
 
           this.setState({startDate: newStart,
-                         endDate: newEnd,
-                        aveData: aveData});
+                         endDate: newEnd,});
 
                                 
           Meteor.call('tasks.updateStart', "855", newStart.substring(0,10), newStart.substring(11,19));
